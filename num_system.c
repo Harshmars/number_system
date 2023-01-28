@@ -16,8 +16,6 @@ int power(int x,int n){
     }
 }
 
-
-
 int rev(int num,int revrs,int rem){//reversing a number.
     if(num==0){
         return revrs;
@@ -237,8 +235,7 @@ double fl_bin(int num,double sum,double po,double i,double rem,int system){ //co
     return fl_bin(num/10,sum=sum+(1/(system*po))*rem,po=power(system,i),i+1,rem=num%10,system);
 }
 
-
-int increased_zeros(int num,int count){  //used for converting intiger value int float
+int increased_zeros(int num,int count){
     if(num==0){
         return count;
     }
@@ -254,11 +251,9 @@ int any_num_to_dec(float num,int system){
     int final=final_sem_p;
     final=rev(final,0,0);
     final=rev(final,0,0);
-    printf(".");
-    printf("%d",final);
+    return final;
 
 }
-
 int hexadecimal_converstions(int choice){
     char str[100],strpoint[100],non_point[100];
     int begin=0;
@@ -344,20 +339,18 @@ int binery_converstions(int choice){
         case 1:
     //binery to decimal.
         printf("%d",any_num_to_decimal(dec,2));//non float vlaue
-        any_num_to_dec(point,2);//float value
+        printf(".%d",any_num_to_dec(point,2));//float value
         break;
         case 2:
     //binery to octal.
         helper=any_num_to_decimal(dec,2);
-        printf("%d",decimal_num_to_any_num(helper,8));
+        decimal_num_to_any_num(helper,8);
 
         printf(".");
         helper=any_num_to_dec(point,2);//float values
         r=increased_zeros(helper,1);
         helper2=(float)helper/r;
         non_deci_to_any_num(helper2,8);
-        printf("%d",helper2);
-        // non_deci_to_any_num(helper2,8);
         break;
         case 3:
     //binery to hexadecimal.
@@ -416,7 +409,7 @@ int octal_conversions(int choice){
     double num;
     long long decimal=0,base=1;
 
-    printf("enter binary num :  ");
+    printf("enter octal num :  ");
     scanf("%lf",&num);
     double for_intiger_val;
     double for_float_val=modf(num,&for_intiger_val);
@@ -428,6 +421,12 @@ int octal_conversions(int choice){
     //octal to decimal.
         printf("%d",any_num_to_decimal(dec,8));//non float vlaue
         any_num_to_dec(point,2);//float value
+        printf(".");
+        helper=any_num_to_dec(point,8);//float values
+        r=increased_zeros(helper,1);
+        helper2=(float)helper/r;
+        non_deci_to_any_num(helper2,10);
+        printf("%d",helper2);
         break;
         case 11:
     //octal to binery.
@@ -463,7 +462,7 @@ int main(){
     long long decimal=0,base=1;
     printf("enter 1 for binary to decimal\nenter 2 for binary to octal\nenter to 3 Binary to hexadecimal\n");
     printf("enter 4 for Decimal to Binary\nenter 5 for Decimal to octal\nenter to 6 Decimal to hexadecimal\n");
-    printf("enter 7 for hexadecimal to decimal\nenter 8 for hexadecimal to octal\nenter 9 for hexadecimal to binery ");
+    printf("enter 7 for hexadecimal to decimal\nenter 8 for hexadecimal to octal\nenter 9 for hexadecimal to binery\n");
     printf("enter 10 for octal to decimal\nenter 11 for octal to binary\nenter to 12 octal to hexadecimal :  ");
     scanf("%d",&choice);
     if(choice==1||choice==2||choice==3){
@@ -483,35 +482,6 @@ int main(){
     if(choice==10||choice==11||choice==12){
         octal_conversions(choice);
         return 0;
-    }
-    
-
-    printf("enter num :  ");
-    scanf("%lf",&num);
-    double for_intiger_val;
-    double for_float_val=modf(num,&for_intiger_val);
-    int dec=for_intiger_val;
-    float point = for_float_val;
-
-    switch(choice){
-    //decimal to binary
-        case 1:
-        decimal_num_to_any_num(dec,2);
-        printf(".");
-        non_deci_to_any_num(point,2);
-        break;
-    //decimal to octal
-        case 3:
-        decimal_num_to_any_num(dec,8);
-        printf(".");
-        non_deci_to_any_num(point,8);
-        break;
-    //decimal to hexadecimal.
-        case 5:
-        decimal_num_to_hexadecimal(dec,16);
-        printf(".");
-        non_deci_to_hexadecimal(point,16);
-        break;
     }
     return 0;
 }
